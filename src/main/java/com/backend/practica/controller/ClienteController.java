@@ -6,6 +6,8 @@ import com.backend.practica.service.IClienteService;
 import com.backend.practica.model.Cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,32 +25,47 @@ public class ClienteController {
     private IClienteService service;
 
     @PostMapping
-    public Cliente creaCliente(@RequestBody Cliente c)
+    public ResponseEntity<Cliente> creaCliente(@RequestBody Cliente c)
     {
-        return service.crearCliente(c);
+        Cliente obj =  service.crearCliente(c);
+        return new ResponseEntity<Cliente>(obj, HttpStatus.CREATED);        
     }
 
     @GetMapping
-    public List<Cliente> buscarClientes()
+    public ResponseEntity<List<Cliente>> buscarClientes()
     {
-        return service.buscarClientes();
+        List<Cliente> obj =  service.buscarClientes();
+        if(obj.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<List<Cliente>>(obj, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Cliente buscarCliente(@PathVariable(name = "id") Integer id)
+    public ResponseEntity<Cliente> buscarCliente(@PathVariable(name = "id") Integer id)
     {
-        return service.buscarCliente(id);
+        Cliente obj = service.buscarCliente(id);
+        if(obj.getId() == null){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<Cliente>(obj, HttpStatus.OK);
     }   
 
     @PutMapping
-    public Cliente actualizarCliente(@RequestBody Cliente c) {
-        return service.actualizarCliente(c);
+    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente c) 
+    {
+        Cliente obj = service.actualizarCliente(c);
+        if(obj.getId() == null){
+            return ResponseEntity.notFound().build();
+        }
+        return new ResponseEntity<Cliente>(obj, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarCliente(@PathVariable(name = "id") Integer id)
+    public ResponseEntity<Void> eliminarCliente(@PathVariable(name = "id") Integer id)
     {
         service.eliminarCliente(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);       
     }
     
 }
