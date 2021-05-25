@@ -1,8 +1,8 @@
-package com.backend.practica.service;
+package com.backend.practica.mysql.service;
 
 import java.util.List;
 
-import com.backend.practica.model.Cliente;
+import com.backend.practica.mysql.model.Cliente;
 
 public interface IClienteService {
     

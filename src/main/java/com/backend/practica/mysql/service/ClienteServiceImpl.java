@@ -1,9 +1,10 @@
-package com.backend.practica.service;
+package com.backend.practica.mysql.service;
+
 
 import java.util.List;
 
-import com.backend.practica.model.Cliente;
-import com.backend.practica.repository.ClienteRepository;
+import com.backend.practica.mysql.model.Cliente;
+import com.backend.practica.mysql.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
