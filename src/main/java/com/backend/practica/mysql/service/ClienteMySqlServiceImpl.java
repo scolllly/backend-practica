@@ -3,34 +3,34 @@ package com.backend.practica.mysql.service;
 
 import java.util.List;
 
-import com.backend.practica.mysql.model.Cliente;
-import com.backend.practica.mysql.repository.ClienteRepository;
+import com.backend.practica.mysql.model.ClienteMySql;
+import com.backend.practica.mysql.repository.ClienteMySqlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClienteServiceImpl implements IClienteService {
+public class ClienteMySqlServiceImpl implements IClienteMySqlService {
 
     @Autowired
-    private ClienteRepository repo;
+    private ClienteMySqlRepository repo;
 
     @Override
-    public Cliente crearCliente(Cliente c) {
+    public ClienteMySql crearCliente(ClienteMySql c) {
         return repo.save(c);
     }
 
     @Override
-    public Cliente buscarCliente(Integer id) {
+    public ClienteMySql buscarCliente(Integer id) {
         return repo.findById(id).orElse(null);	
     }
 
     @Override
-    public List<Cliente> buscarClientes() {
+    public List<ClienteMySql> buscarClientes() {
         return repo.findAll();
     }
 
     @Override
-    public Cliente actualizarCliente(Cliente c) {
+    public ClienteMySql actualizarCliente(ClienteMySql c) {
         return repo.save(c);
     }
 
@@ -40,12 +40,12 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
-    public Cliente buscarClientePorIdentificacion(String t, String n) {
+    public ClienteMySql buscarClientePorIdentificacion(String t, String n) {
         return repo.findByTipoIdentificacionAndNmroIdentificacion(t,n);
     }
 
     @Override
-    public List<Cliente> buscarClientesMayoresOIgualA(short e) {
+    public List<ClienteMySql> buscarClientesMayoresOIgualA(short e) {
         return repo.findByEdadGreaterThanEqual(e);
     }
 

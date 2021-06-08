@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
         @Index(columnList = "tipo_identificacion, nmro_identificacion", name = "cliente_tipo_nmro_identificacion")
         }
     )
-public class Cliente {
+public class ClienteMySql {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +36,6 @@ public class Cliente {
     private String nmroIdentificacion;
     @Column(name = "edad", columnDefinition = "CHAR(3)")
     private short edad;
-
-    @Transient
-    private Base64 foto;
-
 
     public Integer getId() {
         return this.id;
@@ -89,14 +85,6 @@ public class Cliente {
         this.edad = edad;
     }
 
-
-    public Base64 getFoto() {
-        return this.foto;
-    }
-
-    public void setFoto(Base64 foto) {
-        this.foto = foto;
-    }
 
     
 }
